@@ -1,6 +1,7 @@
 package edu.zhuravlev;
 
 import edu.zhuravlev.function.ConstantFunction;
+import edu.zhuravlev.function.Polynomial;
 import edu.zhuravlev.function.SimpleFunction;
 
 import java.math.BigDecimal;
@@ -16,6 +17,13 @@ public class Main {
                 .power(new ConstantFunction(1))
                 .build();
 
-        System.out.println(_2x.get(vars));
+        ConstantFunction _3 = new ConstantFunction(3);
+
+        Polynomial func = Polynomial.builder()
+                .addMember(_2x)
+                .addMember(_3)
+                .build();
+
+        System.out.println(func.get(vars));
     }
 }
