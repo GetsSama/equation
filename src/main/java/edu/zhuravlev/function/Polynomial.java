@@ -2,15 +2,14 @@ package edu.zhuravlev.function;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
 public class Polynomial implements MathFunction {
     private final List<MathFunction> members;
 
@@ -29,6 +28,21 @@ public class Polynomial implements MathFunction {
         return new PolynomialBuilder();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(3);
+        Iterator<MathFunction> membersIter = members.iterator();
+
+        sb.append(membersIter.next().toString().substring(2));
+
+        while (membersIter.hasNext()) {
+            sb.append(" ");
+            sb.append(membersIter.next());
+        }
+
+        return sb.toString();
+    }
+
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class PolynomialBuilder {
         private final List<MathFunction> members = new ArrayList<>(3);
@@ -38,11 +52,16 @@ public class Polynomial implements MathFunction {
                 throw new IllegalStateException("Polynom must have at least two members");
             }
 
-            return new Polynomial(members);
+            return new Polynomial(Collections.unmodifiableList(members));
         }
 
         public PolynomialBuilder addMember(MathFunction mathFunction) {
             members.add(Objects.requireNonNull(mathFunction));
+            return this;
+        }
+
+        public PolynomialBuilder addMember(Number number) {
+            members.add(new ConstantFunction(Objects.requireNonNull(number)));
             return this;
         }
     }

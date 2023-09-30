@@ -1,9 +1,11 @@
 package edu.zhuravlev.function;
 
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.util.Map;
 
-
+@Getter
 public class ConstantFunction implements MathFunction {
     private final BigDecimal value;
 
@@ -18,5 +20,10 @@ public class ConstantFunction implements MathFunction {
     @Override
     public BigDecimal get(Map<String, BigDecimal> args) {
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return value.toString();
     }
 }
