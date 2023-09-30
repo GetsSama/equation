@@ -26,7 +26,7 @@ public class SimpleFunction implements MathFunction {
     }
 
     @Override
-    public BigDecimal get(Map<String, BigDecimal> args) {
+    public BigDecimal get(FunctionParameters args) {
         BigDecimal argument = args.get(variable);
         BigDecimal multiplierVal = multiplier.get(args);
         BigDecimal powerVal = power.get(args);

@@ -3,7 +3,6 @@ package edu.zhuravlev.function;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 @Getter
 public class ConstantFunction implements MathFunction {
@@ -18,7 +17,7 @@ public class ConstantFunction implements MathFunction {
     }
 
     @Override
-    public BigDecimal get(Map<String, BigDecimal> args) {
+    public BigDecimal get(FunctionParameters args) {
         return value;
     }
 

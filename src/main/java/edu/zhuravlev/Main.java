@@ -1,16 +1,19 @@
 package edu.zhuravlev;
 
-import edu.zhuravlev.function.MathFunction;
-import edu.zhuravlev.function.Polynomial;
-import edu.zhuravlev.function.SimpleFunction;
+import edu.zhuravlev.equation.Equation;
+import edu.zhuravlev.function.*;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
 public class Main {
-    private static Map<String, BigDecimal> vars = Map.of(
-            "x", BigDecimal.valueOf(3),
-            "y", BigDecimal.valueOf(5));
+    private static FunctionParameters vars = new FunctionParameters();
+
+    static {
+        vars.putAll(Map.of(
+                "x", BigDecimal.valueOf(3),
+                "y", BigDecimal.valueOf(5)));
+    }
 
     public static void main(String[] args) {
         MathFunction _x_2 = SimpleFunction.builder().power(2).variable("x").build();
@@ -25,5 +28,9 @@ public class Main {
 
         System.out.println(func.get(vars));
         System.out.println(func);
+
+        Equation equation = new Equation(func, new ConstantFunction(11.5));
+
+        System.out.println(equation.isEquation(vars));
     }
 }

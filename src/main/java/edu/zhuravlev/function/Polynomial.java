@@ -14,7 +14,7 @@ public class Polynomial implements MathFunction {
     private final List<MathFunction> members;
 
     @Override
-    public BigDecimal get(Map<String, BigDecimal> args) {
+    public BigDecimal get(FunctionParameters args) {
         double result = 0;
 
         for (MathFunction member : members) {
